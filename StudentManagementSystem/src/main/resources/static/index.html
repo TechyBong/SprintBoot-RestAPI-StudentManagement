@@ -1,0 +1,40 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<title>Home page</title>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+</head>  
+<body>  
+<p>  
+<a href="student">Get</a>  
+</p> 
+
+<!--<div id="example-table"></div>-->
+
+<form id="urlForm"> 
+    <label for="userId">User ID:</label> 
+    <input type="text" id="userId" name="userId" required> 
+    <button type="submit">Search Student By ID</button> 
+</form> 
+
+<p id="result"></p>
+
+<script   src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"   integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="   crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdn.rawgit.com/olifolkerd/tabulator/master/tabulator.css">
+ <script type="text/javascript" src="https://cdn.rawgit.com/olifolkerd/tabulator/master/tabulator.js"></script>
+<script> 
+	$("#example-table").tabulator("setData", "http://localhost:8080/student");
+    document.getElementById('urlForm').addEventListener('submit', function(event) { 
+        event.preventDefault(); // Prevent the form from submitting 
+        const userId = document.getElementById('userId').value; 
+        const baseUrl = 'http://localhost:8080/student'; 
+        //const dynamicUrl = `${baseUrl}?userId=${encodeURIComponent(userId)}`;
+		const dynamicUrl = `${baseUrl}/${encodeURIComponent(userId)}`;
+		window.location.href=dynamicUrl;
+        document.getElementById('result').innerText = dynamicUrl; 
+    }); 
+</script> 
+</body>  
+</html>  
